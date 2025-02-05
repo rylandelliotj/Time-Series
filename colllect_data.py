@@ -32,6 +32,7 @@ def clean_df(df):
     df.dropna(inplace=True)
     df['Year'] = pd.to_numeric(df['Year'].str[0:4])
     df = df[df['Year'] < 2024]
+    df.columns = ['Year','CLS','SCO','Cromer','Hardisty Heavy','WCS','Hardisty Bow', 'Cold Lake']
     return df
     
 
@@ -39,3 +40,4 @@ def clean_df(df):
 if __name__ == '__main__':
     df = get_df(url)
     df_clean = clean_df(df)
+    df_clean.to_csv('df.csv', index=False)
