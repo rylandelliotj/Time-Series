@@ -6,7 +6,7 @@ Created on Wed Feb  5 13:07:01 2025
 """
 import numpy as np
 
-test = np.array([1, 4, 3, 4, 5, 6, 7, 8, 9, 10])
+test = np.array([11, 6, 2])
 
 def pearson(x,y):
     num = np.sum((x - np.mean(x)) * (y - np.mean(y))) # Covariance
@@ -19,11 +19,13 @@ def pearson(x,y):
 def acf(x, lags):
     
     n = len(x)
-    dem = np.sum((x - np.mean(x))**2)
+    dem = np.sum((x - np.mean(x))**2) # Variance
+    mean = np.mean(x)
+    print('mean: ' + str(mean))
     
     acf_values = []
     for k in range(lags + 1):
-        num = np.sum((x[:n-k] - np.mean(x)) * (x[k:] - np.mean(x)))
+        num = np.sum((x[:n-k] - mean) * (x[k:] - mean)) # Autocovariance
         acf_k = num / dem
         acf_values.append(acf_k)
     
@@ -31,3 +33,5 @@ def acf(x, lags):
 
 def pacf():
     pass
+
+acf(test, 2)
